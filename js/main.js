@@ -97,6 +97,38 @@ $(document).ready(function () {
       customNumber10 > 0 ? (((10 * commit) / totalCommit) * 100).toFixed(2) : 0;
   };
 
+  function dailyProfit(commit, totalCommit, numberOfMiners) {
+    const blocks = 140;
+    const expectedWins = Math.floor(blocks * (commit / totalCommit));
+    const probabilityToWin = commit / totalCommit;
+
+    let probabilityToMeetExpectation = 0;
+    for (let wins = expectedWins; wins < blocks; wins++) {
+      probabilityToMeetExpectation =
+        probabilityToMeetExpectation +
+        binomialCoeff(blocks, wins) *
+          Math.pow(probabilityToWin, wins) *
+          Math.pow(1 - probabilityToWin, blocks - wins);
+    }
+    console.log(probabilityToMeetExpectation);
+    return probabilityToMeetExpectation;
+  }
+
+  function binomialCoeff(n, k) {
+    if (k + k > n) {
+      k = n - k;
+    }
+    if (k < 0) {
+      return 0;
+    } else {
+      var result = 1;
+      for (i = 0; i < k; ) {
+        result = (result * (n - i)) / ++i;
+      }
+      return result;
+    }
+  }
+
   function fetchFees() {
     Promise.all([
       fetch("https://bitcoinfees.earn.com/api/v1/fees/recommended"),
