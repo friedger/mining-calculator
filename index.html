@@ -87,6 +87,9 @@
       </div>
     </div>
     <div class="container">
+      <div class="p-2">
+        <h3>Maximum number of miners</h3>
+      </div>
       <form name="calculator" class="calculator-div">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -255,157 +258,250 @@
                 />
               </div>
             </div>
-            <hr />
-            <div class="row pt-2">
-              <div class="col-md-6 col-sm-6 col-xs-6">
-                <label for="customeNumberOfMiners" class="form-label"
-                  >No. of miners committing minimum:</label
-                >
-                <label
-                  for="customNumberOfMiners"
-                  class="form-label"
-                  id="customNumber"
-                  >0</label
-                >
-                <input
-                  onchange="updateNumber()"
-                  type="range"
-                  class="form-range"
-                  min="0"
-                  max="5"
-                  value="0"
-                  id="customNumberOfMiners"
-                />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
-                <span class="help-block text-muted medium-font"
-                  >Profit avg long term sat/block</span
-                >
-                <input
-                  name="customProfit"
-                  type="number"
-                  readonly
-                  class="form-control"
-                  placeholder="profit"
-                />
-              </div>
-              <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
-                <span class="help-block text-muted medium-font"
-                  >Prob. to win (%)</span
-                >
-                <input
-                  name="customChance"
-                  type="number"
-                  readonly
-                  class="form-control"
-                  placeholder="probability"
-                />
-              </div>
-            </div>
-            <div class="row pt-2">
-              <div class="col-md-6 col-sm-6 col-xs-6">
-                <label for="customeNumberOfMiners2" class="form-label"
-                  >No. of miners committing 2 x minimum:</label
-                >
-                <label
-                  for="customNumberOfMiners2"
-                  class="form-label"
-                  id="customNumber2"
-                  >0</label
-                >
-                <input
-                  onchange="updateNumber()"
-                  type="range"
-                  class="form-range"
-                  min="0"
-                  max="5"
-                  value="0"
-                  id="customNumberOfMiners2"
-                />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
-                <span class="help-block text-muted medium-font"
-                  >Profit avg long term sat/block</span
-                >
-                <input
-                  name="customProfit2"
-                  type="number"
-                  readonly
-                  class="form-control"
-                  placeholder="profit"
-                />
-              </div>
-              <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
-                <span class="help-block text-muted medium-font"
-                  >Prob. to win (%)</span
-                >
-                <input
-                  name="customChance2"
-                  type="number"
-                  readonly
-                  class="form-control"
-                  placeholder="probability"
-                />
-              </div>
-            </div>
-            <div class="row pt-2">
-              <div class="col-md-6 col-sm-6 col-xs-6">
-                <label for="customeNumberOfMiners10" class="form-label"
-                  >No of miners committing 10 x minimum:</label
-                >
-                <label
-                  for="customNumberOfMiners10"
-                  class="form-label"
-                  id="customNumber10"
-                  >0</label
-                >
-                <input
-                  onchange="updateNumber()"
-                  type="range"
-                  class="form-range"
-                  min="0"
-                  max="5"
-                  value="0"
-                  id="customNumberOfMiners10"
-                />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
-                <span class="help-block text-muted medium-font"
-                  >Profit avg long term sat/block</span
-                >
-                <input
-                  name="customProfit10"
-                  type="number"
-                  readonly
-                  class="form-control"
-                  placeholder="profit"
-                />
-              </div>
-              <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
-                <span class="help-block text-muted medium-font"
-                  >Prob. to win (%)</span
-                >
-                <input
-                  name="customChance10"
-                  type="number"
-                  readonly
-                  class="form-control"
-                  placeholder="probability"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </form>
-
       <hr />
+      <div class="p-2">
+        <h3>Probability to win</h3>
+      </div>
+      <div class="row pt-2">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <label for="customeNumberOfMiners" class="form-label"
+            >No. of miners committing minimum:</label
+          >
+          <label for="customNumberOfMiners" class="form-label" id="customNumber"
+            >0</label
+          >
+          <input
+            onchange="updateNumber()"
+            type="range"
+            class="form-range"
+            min="0"
+            max="5"
+            value="0"
+            id="customNumberOfMiners"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
+          <span class="help-block text-muted medium-font"
+            >Profit avg long term sat/block</span
+          >
+          <input
+            name="customProfit"
+            type="number"
+            readonly
+            class="form-control"
+            placeholder="profit"
+          />
+        </div>
+        <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
+          <span class="help-block text-muted medium-font"
+            >Prob. to win (%)</span
+          >
+          <input
+            name="customChance"
+            type="number"
+            readonly
+            class="form-control"
+            placeholder="probability"
+          />
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <label for="customeNumberOfMiners2" class="form-label"
+            >No. of miners committing 2 x minimum:</label
+          >
+          <label
+            for="customNumberOfMiners2"
+            class="form-label"
+            id="customNumber2"
+            >0</label
+          >
+          <input
+            onchange="updateNumber()"
+            type="range"
+            class="form-range"
+            min="0"
+            max="5"
+            value="0"
+            id="customNumberOfMiners2"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
+          <span class="help-block text-muted medium-font"
+            >Profit avg long term sat/block</span
+          >
+          <input
+            name="customProfit2"
+            type="number"
+            readonly
+            class="form-control"
+            placeholder="profit"
+          />
+        </div>
+        <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
+          <span class="help-block text-muted medium-font"
+            >Prob. to win (%)</span
+          >
+          <input
+            name="customChance2"
+            type="number"
+            readonly
+            class="form-control"
+            placeholder="probability"
+          />
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <label for="customeNumberOfMiners10" class="form-label"
+            >No of miners committing 10 x minimum:</label
+          >
+          <label
+            for="customNumberOfMiners10"
+            class="form-label"
+            id="customNumber10"
+            >0</label
+          >
+          <input
+            onchange="updateNumber()"
+            type="range"
+            class="form-range"
+            min="0"
+            max="5"
+            value="0"
+            id="customNumberOfMiners10"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
+          <span class="help-block text-muted medium-font"
+            >Profit avg long term sat/block</span
+          >
+          <input
+            name="customProfit10"
+            type="number"
+            readonly
+            class="form-control"
+            placeholder="profit"
+          />
+        </div>
+        <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
+          <span class="help-block text-muted medium-font"
+            >Prob. to win (%)</span
+          >
+          <input
+            name="customChance10"
+            type="number"
+            readonly
+            class="form-control"
+            placeholder="probability"
+          />
+        </div>
+      </div>
+      <hr />
+      <div class="p-2">
+        <h3>Probability to make profit in a week</h3>
+        <p>1 week = 1,000 blocks</p>
+      </div>
+      <div class="row pt-2">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <label for="customCommit" class="form-label"
+            >Commitment sat/block:</label
+          >
+          <label for="customCommit" class="form-label" id="customCommitLabel"
+            >0</label
+          >
+          <input
+            onchange="updateCommit()"
+            type="range"
+            class="form-range"
+            min="0"
+            step="1000"
+            max="14400000"
+            value="0"
+            id="customCommit"
+          />
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <label for="customTotalCommit" class="form-label"
+            >Total commitment sat/block:</label
+          >
+          <label
+            for="customTotalCommit"
+            class="form-label"
+            id="customTotalCommitLabel"
+            >0</label
+          >
+          <input
+            onchange="updateCommit()"
+            type="range"
+            class="form-range"
+            min="0"
+            max="14400000"
+            step="1000"
+            value="0"
+            id="customTotalCommit"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
+          <span class="help-block text-muted medium-font">Costs</span>
+          <input
+            id="customCosts"
+            type="number"
+            readonly
+            class="form-control"
+            placeholder="Costs in sats"
+          />
+        </div>
+        <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
+          <span class="help-block text-muted medium-font"
+            >Expected rewards</span
+          >
+          <input
+            id="customRewards"
+            type="number"
+            readonly
+            class="form-control"
+            placeholder="Rewards in sats"
+          />
+        </div>
 
+        <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
+          <span class="help-block text-muted medium-font"
+            >Prob. make profit (%)</span
+          >
+          <input
+            id="customProbToMakeProfit"
+            type="number"
+            readonly
+            class="form-control"
+            placeholder="probability"
+          />
+        </div>
+        <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
+          <span class="help-block text-muted medium-font"
+            >Prob. get expected rewards</span
+          >
+          <input
+            id="customProbToGetRewards"
+            type="number"
+            readonly
+            class="form-control"
+            placeholder="probability"
+          />
+        </div>
+      </div>
+      <hr />
       <footer>
         <p>&copy; OpenIntents 2020</p>
       </footer>

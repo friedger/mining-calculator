@@ -38,6 +38,14 @@ document.calculate = () => {
       document.getElementById("customNumberOfMiners10").max = numberOfMiners;
       document.getElementById("customNumberOfMiners10").value = 0;
       document.getElementById("customNumber").innerHTML = 0;
+
+      document.getElementById("customCommit").max = rewardsInSat;
+      document.getElementById("customCommit").value = commit;
+      document.getElementById("customCommitLabel").innerHTML = commit;
+      document.getElementById("customTotalCommit").max = rewardsInSat;
+      document.getElementById("customTotalCommit").value = totalCommit;
+      document.getElementById("customTotalCommitLabel").innerHTML = totalCommit;
+
       document.updateNumber();
     } else {
       const profit = 0;
@@ -94,9 +102,6 @@ document.updateNumber = () => {
     customNumber2 > 0 ? (((2 * commit) / totalCommit) * 100).toFixed(2) : 0;
   document.getElementsByName("customChance10")[0].value =
     customNumber10 > 0 ? (((10 * commit) / totalCommit) * 100).toFixed(2) : 0;
-  probabilityForDisappointmentInPeriod(commit, totalCommit, 1000);
-  probabilityForDisappointmentInPeriod(2 * commit, totalCommit, 1000);
-  probabilityForDisappointmentInPeriod(10 * commit, totalCommit, 1000);
 };
 
 function fetchFees() {
@@ -110,10 +115,47 @@ function fetchFees() {
       form["fee"].value = result[0].fastestFee;
       form["price"].value = result[1].price * 100000000;
       document.calculate();
+      document.updateCommit();
     });
 }
 
-function probabilityForDisappointmentInPeriod(commit, totalCommit, blocks) {
+document.updateCommit = () => {
+  const commit = parseInt(document.getElementById("customCommit").value, 10);
+  document.getElementById("customTotalCommit").min = commit;
+
+  const totalCommit = parseInt(
+    document.getElementById("customTotalCommit").value,
+    10
+  );
+  document.getElementById(
+    "customCommitLabel"
+  ).innerHTML = commit.toLocaleString("en-US", { useGrouping: true });
+  document.getElementById(
+    "customTotalCommitLabel"
+  ).innerHTML = totalCommit.toLocaleString("en-US", { useGrouping: true });
+
+  const {
+    probForDisappointment,
+    probForLoss,
+    costs,
+    expectedRewards,
+  } = probabilitiesInPeriod(commit, totalCommit, 1000);
+  console.log({ probForDisappointment, probForLoss, costs, expectedRewards });
+
+  document.getElementById("customCosts").value = costs;
+  document.getElementById("customRewards").value = expectedRewards;
+
+  document.getElementById("customProbToMakeProfit").value = (
+    (1 - probForLoss) *
+    100
+  ).toFixed(2);
+  document.getElementById("customProbToGetRewards").value = (
+    (1 - probForDisappointment) *
+    100
+  ).toFixed(2);
+};
+
+function probabilitiesInPeriod(commit, totalCommit, blocks) {
   const form = document.forms["calculator"];
   var rewardsInStx = parseInt(form["rewards"].value, 10);
   var price = parseInt(form["price"].value, 10);
@@ -124,16 +166,21 @@ function probabilityForDisappointmentInPeriod(commit, totalCommit, blocks) {
   const costs = (commit + bytes * fee) * blocks;
   const rewardsInSat = rewardsInStx * price;
   const expectedBlocksToWin = Math.ceil((blocks * commit) / totalCommit);
-  const expectedRewards = expectedBlocksToWin * rewardsInSat;
+  const expectedRewards = rewardsInSat * expectedBlocksToWin;
   const minWins = Math.ceil(costs / rewardsInSat);
+
   const probForDisappointment = probabilityToWinLess(
     prob,
     expectedBlocksToWin,
     blocks
   );
   const probForLoss = probabilityToWinLess(prob, minWins, blocks);
-  console.log({ probForDisappointment, probForLoss });
-  return probForDisappointment;
+  return {
+    probForDisappointment,
+    probForLoss,
+    costs,
+    expectedRewards,
+  };
 }
 
 function probabilityToWinLess(prob, totalWins, blocks) {
