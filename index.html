@@ -225,7 +225,9 @@
             <div class="row">
               <div class="col-md-12 pad-adjust align-bottom">
                 <div class="checkbox">
-                  <label> All miners commit same amount settings </label>
+                  <label>
+                    Assumption: All miners commit same amount settings
+                  </label>
                 </div>
               </div>
             </div>
@@ -261,6 +263,62 @@
           </div>
         </div>
       </form>
+      <hr />
+      <div class="p-2">
+        <h3>Excess value distribution</h3>
+        How is the excess value, i.e block reward minus all tx costs distributed
+        between miners and stackers/burn accounts?
+      </div>
+      <div class="row pt-2">
+        <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
+          <span class="help-block text-muted medium-font">
+            Number of miners</span
+          >
+          <input
+            onchange="calculate()"
+            id="customNumberOfMinersExcess"
+            type="number"
+            class="form-control"
+            placeholder="Number of miners"
+          />
+        </div>
+        <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
+          <span class="help-block text-muted medium-font">
+            Total commit sat</span
+          >
+          <input
+            onchange="calculate()"
+            id="totalCommitExcess"
+            type="number"
+            class="form-control"
+            placeholder="Total commit"
+          />
+        </div>
+        <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
+          <span class="help-block text-muted medium-font"
+            >Excess value sat</span
+          >
+          <input
+            id="excessValue"
+            type="text"
+            readonly
+            class="form-control"
+            placeholder="excess value"
+          />
+        </div>
+        <div class="col-lg-3 -col-md-6 col-sm-6 col-xs-6">
+          <span class="help-block text-muted medium-font"
+            >Excess value miner:stacker</span
+          >
+          <input
+            id="excessDistribution"
+            type="text"
+            readonly
+            class="form-control"
+            placeholder="excess distribution"
+          />
+        </div>
+      </div>
       <hr />
       <div class="p-2">
         <h3>Probability to win</h3>

@@ -7,6 +7,15 @@ document.calculate = () => {
   var totalCommit = parseInt(form["totalCommit"].value, 10);
   var bytes = parseInt(form["bytes"].value, 10);
   var numberOfMiners = parseInt(form["numberOfMiners"].value, 10);
+  var customNumberOfMinersExcess = parseInt(
+    document.getElementById("customNumberOfMinersExcess").value ||
+      numberOfMiners,
+    10
+  );
+  var customTotalCommit = parseInt(
+    document.getElementById("totalCommitExcess").value || totalCommit,
+    10
+  );
   var profit = parseInt(form["profit"].value, 10);
   var sameAmount = true;
   if (price == null || price == "") {
@@ -19,16 +28,27 @@ document.calculate = () => {
       const numberOfMiners = Math.floor(rewardsInSat / (commit + txCosts));
       const totalCommit = numberOfMiners * commit;
       const profit = Math.floor(
-        ((rewards * price - numberOfMiners * (commit + txCosts)) * commit) /
-          totalCommit
+        (rewardsInSat * commit) / totalCommit - (commit + txCosts)
       );
       const totalCosts = numberOfMiners * (commit + txCosts);
+      const excessValue = rewardsInSat - customNumberOfMinersExcess * txCosts;
+      const minersShare = Math.floor(
+        ((excessValue - customTotalCommit) / excessValue) * 100
+      );
+      const minersNonShare = 100 - minersShare;
       document.getElementsByName("numberOfMiners")[0].value = numberOfMiners;
       document.getElementsByName("totalCommit")[0].value = totalCommit;
       document.getElementsByName("profit")[0].value = profit;
       document.getElementsByName("txCosts")[0].value = txCosts;
       document.getElementsByName("totalCosts")[0].value = totalCosts;
       document.getElementsByName("rewardsInSat")[0].value = rewardsInSat;
+      document.getElementById(
+        "customNumberOfMinersExcess"
+      ).value = customNumberOfMinersExcess;
+      document.getElementById("totalCommitExcess").value = customTotalCommit;
+      document.getElementById("excessValue").value = excessValue;
+      document.getElementById("excessDistribution").value =
+        minersShare + ":" + minersNonShare;
       document.getElementById("customNumberOfMiners").max = numberOfMiners;
       document.getElementById("customNumberOfMiners").value = numberOfMiners;
       document.getElementById("customNumber").innerHTML = numberOfMiners;
@@ -68,11 +88,13 @@ document.updateNumber = () => {
     10
   );
   const form = document.forms["calculator"];
-  var rewardsInStx = parseInt(form["rewards"].value, 10);
-  var price = parseInt(form["price"].value, 10);
-  var fee = parseInt(form["fee"].value, 10);
-  var commit = parseInt(form["commit"].value, 10);
-  var bytes = parseInt(form["bytes"].value, 10);
+  const rewardsInStx = parseInt(form["rewards"].value, 10);
+  const price = parseInt(form["price"].value, 10);
+  const fee = parseInt(form["fee"].value, 10);
+  const commit = parseInt(form["commit"].value, 10);
+  const bytes = parseInt(form["bytes"].value, 10);
+  const txCosts = fee * bytes;
+  const rewardsInSat = rewardsInStx * price;
 
   document.getElementById("customNumber").innerHTML = customNumber;
   document.getElementById("customNumber2").innerHTML = customNumber2;
@@ -82,13 +104,15 @@ document.updateNumber = () => {
     customNumber * commit +
     customNumber2 * 2 * commit +
     customNumber10 * 10 * commit;
-  const rewards = (commit / totalCommit) * rewardsInStx * price;
-  const rewards2 = ((2 * commit) / totalCommit) * rewardsInStx * price;
-  const rewards10 = ((10 * commit) / totalCommit) * rewardsInStx * price;
-  const profit = Math.floor(rewards - (commit + fee * bytes));
-  const profit2 = Math.floor(rewards2 - (2 * commit + fee * bytes));
-  const profit10 = Math.floor(rewards10 - (10 * commit + fee * bytes));
+  const numberOfMiners = customNumber + customNumber2 + customNumber10;
+  const rewards = (commit / totalCommit) * rewardsInSat;
+  const rewards2 = ((2 * commit) / totalCommit) * rewardsInSat;
+  const rewards10 = ((10 * commit) / totalCommit) * rewardsInSat;
+  const profit = Math.floor(rewards - (commit + txCosts));
+  const profit2 = Math.floor(rewards2 - (2 * commit + txCosts));
+  const profit10 = Math.floor(rewards10 - (10 * commit + txCosts));
 
+  console.log({ profit, profit2, profit10 });
   document.getElementsByName("customProfit")[0].value =
     customNumber > 0 ? profit : 0;
   document.getElementsByName("customProfit2")[0].value =
