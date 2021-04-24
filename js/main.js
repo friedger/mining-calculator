@@ -166,6 +166,18 @@ document.updateCommit = () => {
   } = probabilitiesInPeriod(commit, totalCommit, 1000);
   console.log({ probForDisappointment, probForLoss, costs, expectedRewards });
 
+  const {
+    probForDisappointment1,
+    probForLoss1,
+    costs1,
+    expectedRewards1,
+  } = probabilitiesInPeriod(commit, totalCommit, 1);
+  console.log({
+    probForDisappointment1,
+    probForLoss1,
+    costs1,
+    expectedRewards1,
+  });
   document.getElementById("customCosts").value = costs;
   document.getElementById("customRewards").value = expectedRewards;
 
